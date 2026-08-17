@@ -1,0 +1,9 @@
+# VS Code
+.vscode/
+
+# Sass
+.sass-cache/
+
+# OS
+.DS_Store
+Thumbs.db

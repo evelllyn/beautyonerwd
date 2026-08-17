@@ -1,0 +1,432 @@
+.header {
+  background-color: $primary;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: transform .3s ease;
+
+  &.header--hide {
+    transform: translateY(-100%);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:has(.menu-item:first-child:hover) + .overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .header-box {
+    display: flex;
+    align-items: center;
+    padding: $space-4 0;
+    position: relative;
+    .navbar {
+      display: flex;
+      margin-left: auto;
+      margin-right: $space-4;
+
+      @include tablet {
+        background-color: $primary;
+        position: absolute;
+        top: 100%;
+        left: 0;
+
+        width: 100%;
+        margin: 0;
+        justify-content: center;
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-$space-4);
+
+        transition:
+          opacity .3s ease,
+          visibility .3s ease,
+          transform .3s ease;
+
+        &:has(.menu.active) {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+      }
+
+      .menu {
+        display: flex;
+
+        @include tablet {
+          width: 100%;
+          flex-direction: column;
+        }
+
+        .menu-item {
+          padding: clamp(.5rem, 1vw, 1.5rem);
+          position: relative;
+          cursor: pointer;
+          border-radius: $radius-sm;
+          transition: background-color .3s;
+
+          @include tablet {
+            width: 100%;
+            text-align: center;
+            padding: $space-6 0;
+            border-radius: 0;
+
+            &.active {
+              .product-menu {
+                opacity: 1;
+                visibility: visible;
+                max-height: 30rem;
+              }
+            }
+          }
+
+          @media (hover: hover) and (pointer: fine) {
+            &:not(:first-child):hover {
+              background-color: rgba(224, 224, 218, .6);
+            }
+          }
+
+          //第一層選單
+          > a {
+            color: $dark;
+            font-size: $text-sm;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+
+            i {
+              padding: 0 $space-2;
+            }
+
+            @include tablet {
+              font-size: $text-md;
+            }
+          }
+
+          //透明銜接區
+          &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: -$space-4;
+            width: 100%;
+            height: 1rem;
+
+            @include tablet {
+              display: none;
+            }
+          }
+
+          //第二層選單
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              .product-menu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY($space-4);
+              }
+            }
+          }
+
+          .product-menu {
+            position: absolute;
+            width: max-content;
+            min-width: 100%;
+            top: 100%;
+            left: -80%;
+            z-index: 1;
+
+            background-color: $primary;
+            border-radius: $radius-sm;
+            padding: $space-4;
+            box-shadow: $shadow;
+
+            display: flex;
+            justify-content: center;
+            gap: $space-8;
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY($space-2);
+
+            transition:
+              opacity .3s ease,
+              visibility .3s ease,
+              transform .3s ease;
+
+            @include tablet {
+              position: static;
+              width: 100%;
+              min-width: 0;
+              flex-direction: column;
+              gap: 0;
+              padding: 0;
+
+              box-shadow: none;
+              border-radius: 0;
+
+              transform: none;
+              opacity: 0;
+              visibility: hidden;
+
+              // 不佔空間
+              max-height: 0;
+              overflow: hidden;
+
+              transition:
+                max-height .3s ease,
+                opacity .3s ease,
+                visibility .3s ease;
+            }
+
+            li {
+              color: $dark;
+              background-color: $primary;
+              padding: $space-4;
+              border-radius: $radius-sm;
+
+              font-size: $text-sm;
+              font-weight: 400;
+              letter-spacing: .1em;
+
+              transition:
+                color .3s ease,
+                background-color .3s ease;
+
+              cursor: pointer;
+
+              a {
+                color: inherit;
+              }
+
+              a > i {
+                transition: transform .3s ease;
+              }
+
+              @media (hover: hover) and (pointer: fine) {
+                &:hover {
+                  color: $light;
+                  background-color: $dark;
+
+                  a > i {
+                    transform: translateX($space-2);
+                  }
+                }
+              }
+
+              @include tablet {
+                border-radius: 0;
+                font-size: $text-sm;
+              }
+            }
+          }
+        }
+      }
+    }
+    .search {
+      display: flex;
+
+      @include tablet {
+        --width: 3rem;
+
+        margin-left: auto;
+        width: var(--width);
+
+        &.active {
+          width: min(20rem, 70vw);
+
+          input {
+            width: calc(100% - var(--width));
+            border: .08rem solid $dark;
+            padding: .3em .5em;
+            opacity: 1;
+            pointer-events: auto;
+          }
+          .btn {
+            border-radius: 0 $radius-sm $radius-sm 0;
+          }
+        }
+      }
+
+      input {
+        border: .08rem solid $dark;
+        padding: .3em .5em;
+        border-radius: $radius-sm 0 0 $radius-sm;
+        &:focus {
+          outline: none;
+        }
+
+        @include tablet {
+          width: 0;
+          padding: 0;
+          border: 0;
+          opacity: 0;
+          pointer-events: none;
+
+          transition:
+            padding .3s ease,
+            opacity .3s ease;
+        }
+      }
+      .btn {
+        border-radius: 0 $radius-lg $radius-lg 0;
+
+        @media (hover: hover) and (pointer: fine) {
+          &:hover i {
+            animation: rotate .5s ease-in-out;
+          }
+        }
+
+        @include tablet {
+          flex-shrink: 0;
+          width: 3rem;
+          height: 3rem;
+          border-radius: 50%;
+        }
+      }
+    }
+    .ham-menu {
+      width: 3rem;
+      height: 3rem;
+      position: relative;
+      display: none;
+
+      @include tablet {
+        display: block;
+        margin-left: $space-4;
+      }
+
+      span {
+        display: block;
+        width: 100%;
+        height: 5px;
+        background-color: $dark;
+        border-radius: $radius-md;
+
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+
+        transition:
+          top .2s ease,
+          transform .2s ease;
+
+        &:first-child {
+          top: 25%;
+        }
+        &:nth-child(3) {
+          top: 75%;
+        }
+      }
+
+      &.active span {
+        &:first-child {
+          top: 50%;
+          transform: translateY(-50%) rotate(45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          top: 50%;
+          transform: translateY(-50%) rotate(-45deg);
+        }
+      }
+    }
+  }
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, .5);
+  z-index: 900;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity .3s ease,
+    visibility .3s ease;
+}
+.footer {
+  background-color: $primary;
+
+  .information {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include smallMobile {
+      flex-direction: column;
+    }
+
+    .footer-item {
+      margin: 0 $space-8;
+      padding-block: clamp(1rem, 3.5vw, 3rem);
+
+      a, p {
+        line-height: 3;
+        color: $dark;
+        font-weight: 500;
+
+        @include smallMobile {
+          line-height: 1.8;
+        }
+
+        i {
+          margin-right: $space-2;
+        }
+      }
+    }
+  }
+  .sns {
+    border-top: .08rem solid $dark;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: clamp(1rem, 3vw, 3rem);
+
+    @include smallMobile {
+      flex-direction: column;
+      gap: $space-4;
+    }
+
+    .sns-box {
+      display: flex;
+      gap: $space-4;
+
+      a {
+        width: 3.5rem;
+        height: 3.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 50%;
+        background-color: $dark;
+        color: $light;
+        transition: transform .3s;
+
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            transform: translateY(-$space-2);
+          }
+        }
+
+        i {
+          font-size: $text-md;
+        }
+      }
+    }
+    .copyright {
+      color: $dark;
+    }
+  }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0);}
+  100% { transform: rotate(1800deg);}
+}

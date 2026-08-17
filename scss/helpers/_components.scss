@@ -1,0 +1,23 @@
+.container {
+  width: min(100% - 2rem, 1400px);
+  height: 100%;
+  margin: auto;
+}
+
+.logo {
+  width: 120px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+.btn {
+  border: 1.5px solid $dark;
+  background-color: $dark;
+  color: #fff;
+  padding: .5em;
+}

@@ -1,0 +1,926 @@
+.banner {
+  padding-top: 85px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: $primary;
+  position: relative;
+
+  @include mobile {
+    height: 95vh;
+  }
+
+  .banner-box{
+    height: 95%;
+    display: flex;
+    align-items: center;
+    border-radius: $radius-md;
+
+    background:linear-gradient(90deg, $light 50%, transparent 50%),
+      url("/img/banner.jpg") right center / auto 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    @include mobile {
+      height: 92%;
+      background: linear-gradient(0deg, $light 50%, transparent 50%),
+      url("/img/banner.jpg") center bottom / 100% auto;
+      background-size: cover;
+      align-items: flex-end;
+    }
+
+    .banner-content {
+      width:50%;
+      min-width: 0;
+      height: 100%;
+      color: $dark;
+      display: flex;
+      flex-direction: column;
+
+      @include mobile {
+        width: 100%;
+        height: 50%;
+      }
+
+      .banner-item {
+        background-color: $primary;
+        margin: auto clamp(2rem, 5vw + 1rem, 8rem) auto clamp(1rem, 1vw + 1rem, 2rem);
+        padding: clamp(1.5rem, 3vw, 3rem);
+        position: relative;
+
+        @include mobile {
+          margin: auto;
+          padding: $space-6;
+        }
+
+        h1 {
+          font-size: clamp(2rem, 4vw, 3.5rem);
+          small {
+            display: block;
+            margin-bottom: $space-4;
+          }
+        }
+
+        .typing-box {
+          position: relative;
+          font-size: clamp(.75rem, 1vw + .5rem, 2rem);
+
+          .typing {
+            display: inline-block;
+            animation:
+              typing 4s steps(30, end) forwards;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: .15rem;
+            height: 1.3em;
+            background-color: $dark;
+
+            animation:
+              blink 1s steps(1, end) infinite,
+              cursor-move 4s steps(30, end) forwards;
+          }
+        }
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: -10%;
+          right: -5%;
+          border: .15rem solid $dark;
+
+          @include mobile {
+            top: -6%;
+            right: -3%;
+          }
+        }
+      }
+
+      .shop-button {
+        margin-left: clamp(1.5rem, 3vw + .5rem, 3.5rem);
+
+        @include mobile {
+          margin: 0 auto;
+        }
+
+        .btn {
+          border-radius: $radius-sm;
+          font-size: $text-sm;
+          font-weight: 500;
+          padding: .8em;
+          letter-spacing: .1em;
+          transition: opacity .5s;
+
+          .btn-txt {
+            --height: 2.25rem;
+
+            display: flex;
+            flex-direction: column;
+            height: var(--height);
+            line-height: 1.8;
+            overflow: hidden;
+            span {
+              transition: transform .5s ease;
+            }
+          }
+
+          @media (hover: hover) and (pointer: fine) {
+            &:hover span {
+              transform: translateY(calc(var(--height) * -1));
+            }
+          }
+        }
+      }
+
+      .news {
+        width: 70%;
+        display: flex;
+        align-items: center;
+        gap: clamp(.5rem, 1vw + .5rem, 2rem);
+        letter-spacing: 0.05em;
+        font-weight: 500;
+        margin: auto clamp(1.5rem, 3vw + .5rem, 3.5rem) $space-4;
+
+        @include mobile {
+          margin: auto;
+        }
+
+        .news-title {
+          font-weight: 800;
+        }
+
+        .news-content {
+          display: flex;
+          flex: 1;
+          min-width: 0;
+
+          @include tablet {
+            flex-direction: column;
+          }
+
+          .date {
+            flex-shrink: 0;
+            margin-right: $space-4;
+          }
+
+          .marquee {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            .marquee-txt {
+              display: flex;
+              width: max-content;
+              animation: marquee 35s linear infinite;
+              span {
+                white-space: nowrap;
+                margin-right: $space-12;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .scroll {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(4rem);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-6;
+
+    @include mobile {
+      transform: translateY(6rem);
+    }
+
+    .scroll-box {
+      display: inline-block;
+      span {
+        display: inline-block;
+        transform: rotate(90deg);
+        color: $dark;
+        letter-spacing: .2em;
+        font-size: $text-xs;
+      }
+    }
+
+    &::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: $dark;
+      animation: scroll 1.2s infinite;
+    }
+  }
+}
+.product {
+  background-color: $primary;
+  padding-block: clamp(4rem, 8vw, 8rem);
+
+  .product-box {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-radius: $radius-md;
+    overflow: hidden;
+
+    animation: fade-in linear;
+    animation-timeline: view();
+    animation-range: entry;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include smallMobile {
+      grid-template-columns: 1fr;
+    }
+
+    .product-item {
+      position: relative;
+      overflow: hidden;
+
+      &:first-child {
+        grid-column: span 2;
+        grid-row: span 2;
+
+        @include tablet {
+          grid-column: span 1;
+          grid-row: span 1;
+        }
+      }
+
+      &:last-child {
+        display: none;
+
+        @include tablet {
+          display: block;
+        }
+
+        @include smallMobile {
+          display: none;
+        }
+      }
+
+      img {
+        aspect-ratio: 1 / 1;
+        transition: transform .5s ease;
+      }
+
+      h3 {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        margin: $space-4;
+        letter-spacing: .2em;
+        color: $light;
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -0.25rem;
+          width: 100%;
+          height: 1.5px;
+          background-color: $light;
+
+          transform-origin: left;
+          transform: scaleX(0);
+          transition: .4s ease-out;
+        }
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover img {
+          transform: scale(1.2);
+        }
+
+        &:hover h3::before {
+          transform: scaleX(1);
+        }
+      }
+    }
+  }
+}
+.season {
+  background-color: $primary;
+  padding-block: clamp(1rem, 3vw, 3rem);
+
+  .season-top {
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: .3em;
+    color: $bg-title;
+  }
+
+  .season-box {
+    display: grid;
+    grid-template-columns: minmax(15rem, 3fr) minmax(0, 7fr);
+    gap: clamp(1rem, 2vw + 1rem, 3rem);
+
+    @include tablet {
+      grid-template-columns: minmax(200px, 3fr) minmax(0, 7fr);
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+
+    .q-and-a {
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+
+      @include mobile {
+        position: static;
+        height: auto;
+      }
+
+      .question {
+        display: flex;
+        gap: clamp(.5rem, 1vw + 1rem, 2rem);
+        padding-block: clamp(1rem, 2vw + 1rem, 3rem);
+
+        @include mobile {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .side-content {
+          writing-mode: sideways-rl;
+          color: $side-title;
+          letter-spacing: .13em;
+
+          @include mobile {
+            writing-mode: horizontal-tb;
+          }
+        }
+
+        .question-content {
+          display: flex;
+          flex-direction: column;
+          gap: clamp(.5rem, 1vw + 1rem, 2rem);
+
+          .question-text {
+            span {
+              font-size: clamp(1rem, 1vw + .5rem, 2rem);
+              font-weight: 500;
+              color: $main-title;
+            }
+
+            &:nth-child(1) {
+              span {
+                font-size: clamp(1.5rem, 2vw + .5rem, 3rem);
+
+                &:nth-child(2) {
+                  color: $alert;
+                  display: inline-block;
+                  animation: vibrate 1.5s steps(3, end) infinite;
+                }
+              }
+            }
+
+            &:nth-child(2) {
+              span {
+                display: block;
+
+                @include mobile {
+                  display: inline-block;
+                }
+
+                i {
+                  font-size: clamp(1.5rem, 2vw + .5rem, 3rem);
+                  padding: $space-2;
+                  animation: vibrate 1.5s steps(3, end) infinite;
+                  animation-delay: 1s;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .answer {
+        margin-top: auto;
+        padding-block: clamp(1rem, 2vw + 1rem, 3rem);
+        display: flex;
+        gap: clamp(.5rem, 1vw + 1rem, 2rem);
+
+        animation: slide-in linear;
+        animation-timeline: view();
+        animation-range: entry;
+
+        @include mobile {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .side-content {
+          writing-mode: vertical-rl;
+          color: $side-title;
+          letter-spacing: .13em;
+
+          @include mobile {
+            writing-mode: horizontal-tb;
+          }
+        }
+
+        .anwser-content {
+          display: flex;
+          flex-direction: column;
+          gap: clamp(.5rem, 1vw + 1rem, 2rem);
+
+          span {
+            font-size: clamp(1rem, 1vw + .5rem, 2rem);
+            font-weight: 500;
+            color: $main-title;
+            letter-spacing: 0.08em;
+
+            i {
+              padding: 0 $space-2;
+            }
+          }
+        }
+      }
+    }
+
+    .season-content {
+      margin-block: clamp(4rem, 7vw + 1.5rem, 9rem);
+      display: flex;
+      flex-direction: column;
+      gap: $space-4;
+
+      .season-card {
+        position: sticky;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $space-4;
+
+        min-height: 520px;
+        padding: $space-8;
+        border-radius: $radius-md;
+        box-shadow: $shadow-y;
+
+        @include tablet {
+          grid-template-columns: 1fr;
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 7rem;
+          padding: $space-2;
+
+          text-align: center;
+          background-color: $dark;
+          color: $light;
+          border-radius: $radius-sm $radius-sm 0 0;
+
+          font-size: $text-xs;
+          font-weight: 700;
+          letter-spacing: .12em;
+        }
+
+        &:nth-child(1) {
+          top: 8rem;
+          background-color: #f1f1ee;
+
+          &::before {
+            content: "SPRING";
+            transform: translateX(-3rem) translateY(-100%);
+          }
+        }
+
+        &:nth-child(2) {
+          top: 12rem;
+          background-color: #e0e0da;
+
+          &::before {
+            content: "SUMMER";
+            transform: translateX(-4rem) translateY(-100%);
+          }
+        }
+
+        &:nth-child(3) {
+          top: 16rem;
+          background-color: #d1c6b8;
+
+          &::before {
+            content: "AUTUMN";
+            transform: translateX(-5rem) translateY(-100%);
+          }
+        }
+
+        &:nth-child(4) {
+          top: 20rem;
+          background-color: #b2a8a1;
+
+          &::before {
+            content: "WINTER";
+            transform: translateX(-6rem) translateY(-100%);
+          }
+        }
+
+        .card-image {
+          height: 100%;
+          border-radius: 1.6rem;
+          overflow: hidden;
+
+          img {
+            height: 100%;
+          }
+        }
+
+        .card-content {
+          padding: $space-4;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: $space-8;
+
+          span {
+            letter-spacing: .1em;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.48);
+          }
+
+          h3 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1;
+            margin: $space-2 0;
+          }
+
+          p {
+            font-size: $text-xs;
+            letter-spacing: .08em;
+            color: #55504a;
+          }
+
+          .card-capsule {
+            display: flex;
+            flex-wrap: wrap;
+            gap: $space-4;
+
+            span {
+              color: #39352f;
+              background-color: rgba(255, 255, 255, 0.55);
+              padding: $space-2;
+              border-radius: $radius-lg;
+              border: 0.05rem solid rgba(0, 0, 0, 0.9);
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.hot-sale {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-16;
+
+  padding-block: clamp(4rem, 12vw, 12rem);
+  background-color: $primary;
+  position: relative;
+  overflow: clip;
+
+  .slide {
+    position: absolute;
+    top: $space-12;
+    left: 0;
+    font-size: clamp(6.5rem, 12vw + 1rem, 14rem);
+    font-weight: 900;
+
+    color: $light;
+    letter-spacing: .1em;
+    display: flex;
+    width: max-content;
+
+    animation: marquee 90s linear infinite;
+
+    span {
+      margin-right: 10rem;
+    }
+  }
+
+  h2 {
+    color: $dark;
+    font-size: clamp(1rem, 1vw + 1rem, 3rem);
+    letter-spacing: .2em;
+    z-index: 1;
+  }
+
+  .carousel {
+    --gap: 2rem;
+
+    display: flex;
+    gap: var(--gap);
+
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    anchor-name: --carousel;
+    scroll-snap-type: x mandatory;
+    scroll-marker-group: after;
+
+    @include tablet {
+      --gap: 1.5rem;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &::scroll-button(right),
+    &::scroll-button(left) {
+      content: '\f105';
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      border: none;
+      background-color: $dark;
+      color: $light;
+
+      font-size: clamp(1.5rem, 2vw + 1rem, 4rem);
+      width: clamp(3rem, 3vw + 1rem, 5rem);
+      height: clamp(3rem, 3vw + 1rem, 5rem);
+      border-radius: 50%;
+      cursor: pointer;
+
+      position: fixed;
+      position-anchor: --carousel;
+      position-area: inline-end center;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: auto;
+      }
+    }
+
+    &::scroll-button(left) {
+      content: '\f104';
+      position-area: inline-start center;
+    }
+
+    &::scroll-marker-group {
+      display: flex;
+      justify-content: center;
+      gap: $space-4;
+    }
+
+    .carousel-item {
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      gap: $space-2;
+      min-width: 0;
+      flex: 0 0 calc((100% - var(--gap)*2)/3);
+
+      @include tablet {
+        flex: 0 0 calc((100% - var(--gap))/2);
+      }
+
+      @include smallMobile {
+        flex: 0 0 100%;
+      }
+
+      &::scroll-marker {
+        content: '○';
+        color: $dark;
+        text-decoration: none;
+      }
+
+      &::scroll-marker:target-current {
+        content: '●';
+      }
+
+      span {
+        padding: $space-2 0;
+        color: $dark;
+        font-size: $text-sm;
+        font-weight: 500;
+
+        letter-spacing: 0.05em;
+        position: relative;
+        align-self: flex-start;
+
+        &::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 1px;
+          background-color: $dark;
+          animation: line-flash 2s linear infinite;
+        }
+      }
+
+      img {
+        aspect-ratio: 1 / 1;
+        border-radius: $radius-md;
+      }
+    }
+  }
+}
+.tips {
+  padding-block: clamp(2rem, 8vw, 6rem);
+  overflow: clip;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -8rem;
+    z-index: -1;
+
+    background-image:
+      linear-gradient(rgb(247, 245, 239, 0.9), rgba(247, 245, 239, 0.9)),
+      url("/img/bg.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+
+    animation: bg-move linear;
+    animation-timeline: view();
+    animation-range: entry exit;
+  }
+
+  .tips-box {
+    padding: clamp(3rem, 8vw, 7.5rem) clamp(2rem, 6vw, 7.5rem);
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    column-gap: clamp(2rem, 7.5vw, 7.5rem);
+    row-gap: 5rem;;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include smallMobile {
+      grid-template-columns: 1fr;
+      row-gap: clamp(4rem, 10vw, 6rem);
+    }
+
+    .tips-item {
+      text-align: center;
+      border: clamp(.375rem, .6vw, .5rem) solid $dark;
+      background-color: $light;
+      border-radius: $radius-md;
+      box-shadow: $shadow-xy;
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          i {
+            animation: shake .2s linear infinite alternate;
+          }
+          .txt h2 > span {
+            transform: translateY(-100%);
+          }
+        }
+      }
+
+      .icon {
+        --icon-size: clamp(5rem, 8.5vw, 8rem);
+
+        width: var(--icon-size);
+        aspect-ratio: 1;
+        background-color: $light;
+
+        margin-top: calc(var(--icon-size) / -2);
+        margin-inline: auto;
+
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          inset: clamp(-0.5rem, -0.6vw, -0.25rem);
+
+          border: clamp(.375rem, .6vw, .5rem) solid $dark;
+          border-bottom-color: transparent;
+          border-left-color: transparent;
+
+          border-radius: 50%;
+          transform: rotate(-45deg);
+        }
+
+        i {
+          font-size: clamp(2.5rem, 4vw, 4rem);
+          color: $dark;
+        }
+      }
+
+      .txt {
+        padding: 0 $space-2 $space-8;
+        h2 {
+          color: $dark;
+          height: 2.8rem;
+          font-size: clamp(1.25rem, 1.6vw, 1.75rem);
+          line-height: 1.8;
+          overflow: hidden;
+
+          span {
+            display: block;
+            transform: translateY(0);
+            transition: transform .5s ease;
+          }
+        }
+
+        li {
+          font-size: clamp(1rem, 1.5vw, 1.25rem);
+          line-height: 1.8;
+          color: $dark;
+        }
+      }
+    }
+  }
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes cursor-move {
+  0% { left: 0; }
+  15% { left: 4.8ch; }
+  40% { left: 4.8ch; }
+  55% { left: 12.2ch; }
+  90% { left: 12.2ch; }
+  100% { left: 29.4ch; }
+}
+
+@keyframes typing {
+  0% { clip-path: inset(0 100% 0 0); }
+  15% { clip-path: inset(0 calc(100% - 6ch) 0 0); }
+  40% { clip-path: inset(0 calc(100% - 6ch) 0 0); }
+  55% { clip-path: inset(0 calc(100% - 15ch) 0 0); }
+  90% { clip-path: inset(0 calc(100% - 15ch) 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes scroll {
+  0% { transform-origin: top; transform: scaleY(0); }
+  45% { transform-origin: top; transform: scaleY(1); }
+  50% { transform-origin: bottom; transform: scaleY(1); }
+  100% { transform-origin: bottom; transform: scaleY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; scale: .9;}
+  to { opacity: 1; scale: 1; }
+}
+
+@keyframes vibrate {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-3px, -1px); }
+  50% { transform: translate(3px, -2px); }
+  75% { transform: translate(-2px, 2px); }
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(100%);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes line-flash {
+  0% { transform-origin: left; transform: scaleX(0); }
+  45% { transform-origin: left; transform: scaleX(1); }
+  50% { transform-origin: right; transform: scaleX(1); }
+  100% { transform-origin: right; transform: scaleX(0); }
+}
+
+@keyframes bg-move {
+  from { transform: translateY(-20%);}
+  to { transform: translateY(20%);}
+}
+
+@keyframes shake {
+  from { transform: rotate(-10deg); }
+  to { transform: rotate(10deg); }
+}

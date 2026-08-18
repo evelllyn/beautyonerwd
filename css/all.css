@@ -471,7 +471,7 @@ img {
   display: flex;
   align-items: center;
   border-radius: 2rem;
-  background: linear-gradient(90deg, #FFFDF7 50%, transparent 50%), url("/img/banner.jpg") right center/auto 100%;
+  background: linear-gradient(90deg, #FFFDF7 50%, transparent 50%), url("../../img/banner.jpg") right center/auto 100%;
   background-repeat: no-repeat;
   background-size: cover;
 }

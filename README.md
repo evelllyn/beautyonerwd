@@ -58,6 +58,5 @@ BeautyOne 是一個以 HTML + SCSS 製作的美妝保養品牌形象網站，著
 ## 專案展示
 
 ### Desktop
-<img width="720" height="959" alt="2026-08-18 20 46 11" src="https://github.com/user-attachments/assets/ae89a182-1cca-4539-8e30-bb7edba5b411" /><img width="926" height="895" alt="螢幕擷取畫面 2026-08-18 204135" src="https://github.com/user-attachments/assets/1b6d9abe-6bef-49ef-96f1-033835f864f3" />
 ### Tablet
 ### Mobile

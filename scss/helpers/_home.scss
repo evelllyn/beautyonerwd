@@ -19,14 +19,14 @@
     border-radius: $radius-md;
 
     background:linear-gradient(90deg, $light 50%, transparent 50%),
-      url("../../img/banner.jpg") right center / auto 100%;
+      url("../img/banner.jpg") right center / auto 100%;
     background-repeat: no-repeat;
     background-size: cover;
 
     @include mobile {
       height: 92%;
       background: linear-gradient(0deg, $light 50%, transparent 50%),
-      url("/img/banner.jpg") center bottom / 100% auto;
+      url("../img/banner.jpg") center bottom / 100% auto;
       background-size: cover;
       align-items: flex-end;
     }
@@ -752,7 +752,7 @@
 
     background-image:
       linear-gradient(rgb(247, 245, 239, 0.9), rgba(247, 245, 239, 0.9)),
-      url("/img/bg.jpg");
+      url("../img/bg.jpg");
     background-position: center;
     background-repeat: no-repeat;
 

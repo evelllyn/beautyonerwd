@@ -471,14 +471,14 @@ img {
   display: flex;
   align-items: center;
   border-radius: 2rem;
-  background: linear-gradient(90deg, #FFFDF7 50%, transparent 50%), url("../../img/banner.jpg") right center/auto 100%;
+  background: linear-gradient(90deg, #FFFDF7 50%, transparent 50%), url("../img/banner.jpg") right center/auto 100%;
   background-repeat: no-repeat;
   background-size: cover;
 }
 @media (max-width: 768px) {
   .banner .banner-box {
     height: 92%;
-    background: linear-gradient(0deg, #FFFDF7 50%, transparent 50%), url("/img/banner.jpg") center bottom/100% auto;
+    background: linear-gradient(0deg, #FFFDF7 50%, transparent 50%), url("../img/banner.jpg") center bottom/100% auto;
     background-size: cover;
     align-items: flex-end;
   }
@@ -1124,7 +1124,7 @@ img {
   position: absolute;
   inset: -8rem;
   z-index: -1;
-  background-image: linear-gradient(rgba(247, 245, 239, 0.9), rgba(247, 245, 239, 0.9)), url("/img/bg.jpg");
+  background-image: linear-gradient(rgba(247, 245, 239, 0.9), rgba(247, 245, 239, 0.9)), url("../img/bg.jpg");
   background-position: center;
   background-repeat: no-repeat;
   animation: bg-move linear;
